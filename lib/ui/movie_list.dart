@@ -9,7 +9,7 @@ class MovieList extends StatelessWidget {
   final MovieCategory category;
   MovieList({super.key, required this.category});
 
-  List<MovieBase> movieList = List.empty();
+  final List<MovieBase> movieList = List.empty(growable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +20,33 @@ class MovieList extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Text("Error: ${snapshot.error}");
         } else {
-          movieList = snapshot.data!;
-          return Container(
-            child: Column(
-              children: [
-                Text(
+          movieList.addAll(snapshot.data!);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
                   category.name,
                   textAlign: TextAlign.start,
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                Container(
-                    height: 320,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: movieList.length,
-                      itemBuilder: (context, index) {
-                        MovieBase movie = movieList.elementAt(index);
-                        return MovieCard(
-                            movieTitle: movie.title,
-                            movieImage: movie.posterPath!);
-                      },
-                    ))
-              ],
-            ),
+              ),
+              Container(
+                  alignment: Alignment.topLeft,
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movieList.length,
+                    itemBuilder: (context, index) {
+                      MovieBase movie = movieList.elementAt(index);
+                      return MovieCard(
+                          movieTitle: movie.title,
+                          movieImage: movie.posterPath!);
+                    },
+                  ))
+            ],
           );
         }
       },

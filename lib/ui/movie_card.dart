@@ -9,14 +9,14 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      height: 250,
+      height: 200,
       padding: const EdgeInsets.all(4),
       child: Column(
         children: [
           Image.network(
             movieImage,
             width: 150,
-            height: 250,
+            height: 200,
           ),
           const SizedBox(height: 4),
           Text(
