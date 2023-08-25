@@ -16,7 +16,7 @@ class MovieList extends StatelessWidget {
     return FutureBuilder<List<MovieBase>>(
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator(); // Show loading indicator
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text("Error: ${snapshot.error}");
         } else {
@@ -34,6 +34,7 @@ class MovieList extends StatelessWidget {
                 ),
               ),
               Container(
+                padding: const EdgeInsets.only(left: 8),
                   alignment: Alignment.topLeft,
                   height: 250,
                   child: ListView.builder(
@@ -41,9 +42,12 @@ class MovieList extends StatelessWidget {
                     itemCount: movieList.length,
                     itemBuilder: (context, index) {
                       MovieBase movie = movieList.elementAt(index);
-                      return MovieCard(
-                          movieTitle: movie.title,
-                          movieImage: movie.posterPath!);
+                      return Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: MovieCard(
+                            movieTitle: movie.title,
+                            movieImage: movie.posterPath!),
+                      );
                     },
                   ))
             ],
@@ -56,6 +60,6 @@ class MovieList extends StatelessWidget {
 
   Future<List<MovieBase>> getMovieListFromRepository(
       MovieCategory category) async {
-    return await getMovieDetails(category);
+    return await getMovieList(category);
   }
 }

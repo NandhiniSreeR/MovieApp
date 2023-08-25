@@ -8,24 +8,36 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.black,),
       width: 150,
       height: 200,
-      padding: const EdgeInsets.all(4),
       child: Column(
         children: [
-          Image.network(
-            movieImage,
-            width: 150,
-            height: 200,
-          ),
+          ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                fit: BoxFit.cover,
+                movieImage,
+                width: 150,
+                height: 200,
+              )),
           const SizedBox(height: 4),
-          Text(
-            movieTitle,
-            maxLines: 2,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          )
+          Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    movieTitle,
+                    maxLines: 2,
+                    style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16, color: Colors.white),
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );
