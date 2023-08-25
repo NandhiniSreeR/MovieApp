@@ -15,44 +15,50 @@ class MovieList extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<List<MovieBase>>(
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
-        } else {
+        //TODO: Move this to data layer
+        if (!snapshot.hasError &&
+            snapshot.connectionState != ConnectionState.waiting) {
           movieList.addAll(snapshot.data!);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  category.name,
-                  textAlign: TextAlign.start,
-                  style: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 8),
-                  alignment: Alignment.topLeft,
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: movieList.length,
-                    itemBuilder: (context, index) {
-                      MovieBase movie = movieList.elementAt(index);
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 4),
-                        child: MovieCard(
-                            movieTitle: movie.title,
-                            movieImage: movie.posterPath!),
-                      );
-                    },
-                  ))
-            ],
-          );
         }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                category.name,
+                textAlign: TextAlign.start,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 8),
+              alignment: Alignment.topLeft,
+              height: 250,
+              child: snapshot.connectionState == ConnectionState.waiting
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: Colors.black,
+                    ))
+                  : snapshot.hasError
+                      ? Text("Error: ${snapshot.error}")
+                      : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: movieList.length,
+                          itemBuilder: (context, index) {
+                            MovieBase movie = movieList.elementAt(index);
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 4),
+                              child: MovieCard(
+                                  movieTitle: movie.title,
+                                  movieImage: movie.posterPath!),
+                            );
+                          },
+                        ),
+            )
+          ],
+        );
       },
       future: getMovieListFromRepository(category),
     );
