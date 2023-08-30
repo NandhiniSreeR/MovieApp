@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_dart/tmdb_dart.dart';
 
-import 'movie_details_screen.dart';
+import '../details/movie_details_screen.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieBase movie;

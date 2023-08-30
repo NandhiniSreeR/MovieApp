@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/ui/movie_list.dart';
-import 'package:movie_app/data/movie_category.dart';
+import 'package:movie_app/movie/ui/movie_list.dart';
+import 'package:movie_app/movie/data/movie_category.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/data/movie_category.dart';
-import 'package:movie_app/repository/movie_repository.dart';
+import 'package:movie_app/movie/data/movie_category.dart';
+import 'package:movie_app/movie/repository/movie_repository.dart';
 import 'package:tmdb_dart/tmdb_dart.dart';
 
 import 'movie_card.dart';

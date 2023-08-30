@@ -1,6 +1,6 @@
-import 'package:movie_app/data/movie_category.dart';
+import 'package:movie_app/movie/data/movie_category.dart';
 import 'package:tmdb_dart/tmdb_dart.dart';
-import 'package:movie_app/data/app_config.dart';
+import 'package:movie_app/app/data/app_config.dart';
 
 Future<List<MovieBase>> getMovieList(MovieCategory category) async {
   TmdbService service = TmdbService(AppConfig.apiKey);
