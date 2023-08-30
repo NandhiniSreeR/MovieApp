@@ -49,11 +49,10 @@ class MovieList extends StatelessWidget {
                           itemBuilder: (context, index) {
                             MovieBase movie = movieList.elementAt(index);
                             return Padding(
-                              padding: const EdgeInsets.only(right: 4),
-                              child: MovieCard(
-                                  movieTitle: movie.title,
-                                  movieImage: movie.posterPath!),
-                            );
+                                padding: const EdgeInsets.only(right: 4),
+                                child: MovieCard(
+                                  movie: movie,
+                                ));
                           },
                         ),
             )

@@ -6,8 +6,9 @@ class MovieApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LandingScreen(),
+    return MaterialApp(
+      home: const LandingScreen(),
+      theme: ThemeData(appBarTheme: const AppBarTheme(backgroundColor: Color.fromARGB(175, 0, 0, 0))),
     );
   }
 }
